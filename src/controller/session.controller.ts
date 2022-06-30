@@ -24,3 +24,6 @@ export async function createUserSessionHandler(req:Request, res:Response) {
   return res.send({acessToken,refreshToken})
   
 }
+export async function getUserSessionHandler(req:Request, res:Response) {
+  
+}

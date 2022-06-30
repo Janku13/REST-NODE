@@ -1,4 +1,4 @@
 import {Request,Response,NextFunction} from 'express'
-const deserializeUser = (req:Request, res, next) =>{
+const deserializeUser = (req:Request, res:Response, next:NextFunction) =>{
 
 }
