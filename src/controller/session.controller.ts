@@ -14,11 +14,11 @@ export async function createUserSessionHandler(req:Request, res:Response) {
   const session = await createSession(user._id,req.get("user-agent")||"")
   //create token
   const accessToken = signJwt(
-    {...user,session:session._id},{expiresIn:config.get('accessTplemTtl')} //15min
+    {...user,session:session._id},{expiresIn:config.get('accessTokenTtl')} //15min
   )
   //refresh token
   const refreshToken = signJwt(
-    {...user,session:session._id},{expiresIn:config.get('accessTplemTtl')} //15min
+    {...user,session:session._id},{expiresIn:config.get('refreshTokenTtl')} //15min
   )
   //return acess & ref token
   return res.send({accessToken,refreshToken})
