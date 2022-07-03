@@ -20,6 +20,22 @@ export async function createUserSessionHandler(req:Request, res:Response) {
   const refreshToken = signJwt(
     {...user,session:session._id},{expiresIn:config.get('refreshTokenTtl')} //15min
   )
+  res.cookie("accessToken",accessToken, {
+    maxAge: 900000, //15min
+    httpOnly: true,
+    domain: "localhost",
+    path: "",
+    sameSite: "strict",
+    secure:false
+  })
+    res.cookie("refreshToken",refreshToken, {
+    maxAge: 3.154e10, //1yr
+    httpOnly: true,
+    domain: "localhost",
+    path: "",
+    sameSite: "strict",
+    secure:false
+  })
   //return acess & ref token
   return res.send({accessToken,refreshToken})
   
