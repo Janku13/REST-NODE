@@ -7,8 +7,8 @@ import logger from '../utils/logger'
 export async function createUserHandler(req: Request<{}, {}, CreateUserInput['body']>, res: Response) {  
   try {
     const user = await createUser(req.body)
-    logger.info(user)
-    return res.send(omit(user.toJSON(),"password","__v"))
+    logger.info('my',user)
+    return res.send(omit(user.toJSON(),["password","__v"]))
   } catch (e:any) {
     logger.error(e)
     return res.status(409).send(e.message)

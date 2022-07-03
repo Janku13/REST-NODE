@@ -5,7 +5,10 @@ import UserModel, { UserDocument } from '../models/user.model';
 export async function createUser (input: DocumentDefinition<Omit<UserDocument,'createdAt' | 'updateAt'| 'comparePassword'>>) {
   try {
     const user = await UserModel.create(input)
-    return omit(user.toJSON(),"password","__v")
+ 
+    // const userObject = omit(user.toJSON(), "password")
+    //  console.log("response user",userObject)
+    return user
   } catch (e:any) {
     throw new Error(e)
   }
@@ -18,7 +21,7 @@ export async function validatePassword({email,password}:{email:string,password:s
   }
   const isValid = await user.comparePassword(password)
   if (!isValid) return false
-  return omit(user.toJSON(),"password","__v")
+  return omit(user.toJSON(),["password","__v"])
 }
 
 export async function findUser(query : FilterQuery<UserDocument>) {
